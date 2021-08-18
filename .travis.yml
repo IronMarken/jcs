@@ -3,4 +3,4 @@ language: java
 jdk:
   - oraclejdk15
 
-script: mvn clean test
+script: mvn clean test -B
