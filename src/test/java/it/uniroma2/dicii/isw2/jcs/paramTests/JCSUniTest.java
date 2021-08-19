@@ -2,6 +2,8 @@ package it.uniroma2.dicii.isw2.jcs.paramTests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
@@ -13,7 +15,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(value=Parameterized.class)
 public class JCSUniTest {
 		
 		private JCS instance;
@@ -21,8 +27,31 @@ public class JCSUniTest {
 		private HashMap<String, String> map;
 		private byte[] keyBytes;
 		private byte[] valueBytes;
+		private String memName;
+		private Integer keySize;
+		private Integer dataSize;
 		
 		private static Random r = null;
+		
+		@Parameters
+		public static Collection<Object[]> params(){
+			return Arrays.asList( new Object[][] {
+				{"testCache1",32,128},
+				{"testCache1",1,1},
+				{"testCache1",18,9}
+			});			
+		}
+		
+		public void configureParams(String name, Integer keySize, Integer dataSize) {
+			this.memName = name;
+			this.keySize = keySize;
+			this.dataSize = dataSize;
+		}
+		
+		public JCSUniTest(String name, Integer keySize, Integer dataSize) {
+			configureParams(name, keySize, dataSize);
+		}
+		
 		
 		@BeforeClass
 		public static void configureBeforeClass() {
@@ -31,7 +60,7 @@ public class JCSUniTest {
 		
 		@Before
 		public void configureTest() throws CacheException {
-			this.instance = JCS.getInstance("testCache1");
+			this.instance = JCS.getInstance(memName);
 			this.list = this.configureList();
 			
 		}
@@ -39,8 +68,8 @@ public class JCSUniTest {
 		private HashMap<String, String> configureMap() {
 			this.map = new HashMap<String, String>();
 			
-			this.keyBytes = new byte[32];
-			this.valueBytes = new byte[128];
+			this.keyBytes = new byte[keySize];
+			this.valueBytes = new byte[dataSize];
 			
 			for(int i = 0; i < 10; i++) {
 				JCSUniTest.r.nextBytes( this.keyBytes );

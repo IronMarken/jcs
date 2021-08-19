@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" mlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
   <modelVersion>4.0.0</modelVersion>
   <groupId>ferri.marco</groupId>
   <artifactId>maven-jcs</artifactId>
@@ -28,10 +28,10 @@
 
 	<!-- JCS -->
   	<dependency>
-  		<groupId>org.apache.jcs</groupId>
+  		<groupId>jcs</groupId>
   		<artifactId>jcs</artifactId>
   		<version>1.3</version>
-  	</dependency>	
+  	</dependency>
   	
   </dependencies>
   
@@ -114,7 +114,7 @@
     
     <resources>
          <resource>
-            <directory>src/test/resources</directory>
+            <directory>src/test//test-conf</directory>
               <includes>
                  <include>**/*.ccf</include>
               </includes>
@@ -124,7 +124,7 @@
   
   <profiles>
   	<profile>
-		<id>coverageProfile</id>
+		<id>coverage</id>
 		<activation>
 			<activeByDefault>false</activeByDefault>
 		</activation>

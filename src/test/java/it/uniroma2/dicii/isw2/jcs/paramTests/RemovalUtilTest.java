@@ -21,31 +21,35 @@ public class RemovalUtilTest{
 	private JCS instance;
 	private int start;
 	private int end;
+	private String memName;
 	private boolean check;
 	
 	@Parameters
 	public static Collection<Object[]> params() {
 		return Arrays.asList(new Object[][] {
-			{1,1, false},
-			{2,1, false},
-			{3,5, false},
-			{-1,2, false}
+			{false, 1,1, "testCache1"},
+			{false,2,1, "testCache1"},
+			{false,3,5, "testCache1"},
+			{false,-1,2, "testCache1"},
+			{true, 1,-1, "testCache1"},
+			{false, -1,-2, "testCache1"}
 		});
 	}
 	
-	public RemovalUtilTest(int start, int end, boolean check) {
-		this.configureValues(start, end, check);
+	public RemovalUtilTest(boolean check, int start, int end, String name) {
+		this.configureValues(check, start, end, name);
 	}
 	
-	private void configureValues(int start, int end, boolean check) {
+	private void configureValues(boolean check,int start, int end, String name) {
+		this.check = check;
 		this.start = start;
 		this.end = end;
-		this.check = check;
+		this.memName = name;
 	}
 	
 	@Before
 	public void configureInstance() throws CacheException {
-		this.instance = JCS.getInstance("testCache1");
+		this.instance = JCS.getInstance(this.memName);
 	}
 	
 	@After
