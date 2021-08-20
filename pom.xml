@@ -114,7 +114,7 @@
     
     <resources>
          <resource>
-            <directory>src/test//test-conf</directory>
+            <directory>src/test/resources</directory>
               <includes>
                  <include>**/*.ccf</include>
               </includes>
